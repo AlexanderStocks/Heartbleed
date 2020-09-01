@@ -1,9 +1,5 @@
-
-import org.w3c.dom.ls.LSOutput;
-
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.io.*;
 
@@ -81,8 +77,8 @@ public class Heartbleed {
         try {
           FileWriter fileWriter = new FileWriter("HeartbleedOutput.txt");
 
-          for (int x = 0; x < output.length; x++) {
-             fileWriter.write(byteToHex(output[x]) + " ");
+          for (byte b : output) {
+            fileWriter.write(byteToHex(b) + " ");
           }
 
           fileWriter.close();
